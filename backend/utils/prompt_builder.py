@@ -1,6 +1,6 @@
 def build_prompt(resume_data, job_desc, company, title):
     return f"""
-You are an expert career assistant. Write a short, personalized, and humanized cover letter paragraph that aligns the candidate's resume with the job requirements.
+You are an expert career assistant. Write a concise, personalized cover letter that aligns the candidate's resume with the job requirements.
 
 ## Candidate Resume:
 {resume_data}
@@ -11,11 +11,16 @@ You are an expert career assistant. Write a short, personalized, and humanized c
 ## Company: {company}
 ## Job Title: {title}
 
-Only return the cover letter in the following format:
+Write a cover letter that:
+1. Uses only "Dear Hiring Manager" as the salutation (do not add company name)
+2. Contains exactly one paragraph with 4-5 sentences
+3. Clearly matches the candidate's strengths with the job requirements
+4. Is professional and engaging
 
+Format:
 Dear Hiring Manager,
 
-[One paragraph cover letter that clearly matches the candidate's strengths with the company and job description.]
+[One paragraph with 4-5 sentences that clearly matches the candidate's strengths with the company and job description.]
 
 Sincerely
 """

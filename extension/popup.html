@@ -13,8 +13,11 @@
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 4px;
-      max-height: 100px;
+      max-height: 200px;
       overflow-y: auto;
+    }
+    .preview-box.editable {
+      background-color: #fff;
     }
     .error-message {
       color: #d32f2f;
@@ -40,6 +43,19 @@
       display: flex;
       gap: 10px;
       margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .preview-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0;
     }
     button {
       background-color: #4caf50;
@@ -49,27 +65,45 @@
       border-radius: 4px;
       cursor: pointer;
       flex: 1;
+      min-width: 120px;
     }
     button:hover {
       background-color: #45a049;
     }
-    button.secondary {
-      background-color: #2196F3;
+   
+    button.download {
+      background-color: #FF9800;
     }
-    button.secondary:hover {
-      background-color: #1976D2;
+    button.download:hover {
+      background-color: #F57C00;
     }
     button:disabled {
       background-color: #cccccc;
       cursor: not-allowed;
+    }
+    .edit-preview {
+      background-color: #45a049;
+      padding: 4px 8px;
+      font-size: 0.8em;
+      min-width: auto;
+      flex: 0;
+      margin-left: 10px;
+    }
+    .edit-preview:hover {
+      background-color: #45a049;
     }
   </style>
 </head>
 <body>
   <h2>CoverGenie</h2>
   <div id="preview" class="preview-box">
-    <h3>Job Description Preview:</h3>
-    <div id="preview-text"></div>
+    <div class="preview-header">
+      <div class="preview-title">
+        <h3>Job Description</h3>
+        <button id="edit-preview" class="edit-preview">Edit</button>
+      </div>
+    </div>
+    <div id="preview-text" contenteditable="false"></div>
   </div>
   <div id="error" class="error-message"></div>
   <div id="cover-letter" class="cover-letter" contenteditable="false"></div>
@@ -77,6 +111,7 @@
     <button id="generate">Generate Cover Letter</button>
     <button id="edit" class="secondary" style="display: none;">Edit</button>
     <button id="save" class="secondary" style="display: none;">Save</button>
+    <button id="download" class="download" style="display: none;">Download</button>
   </div>
   <script src="popup.js"></script>
 </body>

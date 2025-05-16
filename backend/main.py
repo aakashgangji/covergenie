@@ -20,7 +20,7 @@ async def generate(request: Request):
         return JSONResponse({
             "success": True,
             "cover_letter": cover_letter,
-            "preview": job_desc[:2000] + "..."  # Preview of job description
+            "preview": job_desc[:200] + "..."  # Preview of job description
         })
     except Exception as e:
         print("[Internal Server Error]", e)
