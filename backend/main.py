@@ -1,7 +1,6 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, FileResponse
 from backend.utils.parser import clean_text
-from backend.utils.doc_gen import save_json_and_txt
 from backend.utils.prompt_builder import build_prompt
 from backend.utils.ollama import generate_cover_letter
 from docx import Document
@@ -12,6 +11,7 @@ import tempfile
 import os
 
 app = FastAPI()
+
 @app.post("/generate")
 async def generate(request: Request):
     try:
