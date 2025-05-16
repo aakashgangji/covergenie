@@ -109,18 +109,41 @@ document.getElementById("edit-preview").addEventListener("click", () => {
 });
 
 // Add download functionality
-document.getElementById("download").addEventListener("click", () => {
+document.getElementById("download").addEventListener("click", async () => {
     const coverLetterDiv = document.getElementById("cover-letter");
     const content = coverLetterDiv.textContent;
-    const blob = new Blob([content], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'cover_letter.txt';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    
+    try {
+        const response = await fetch("http://localhost:8000/download-docx", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                cover_letter: content
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to download cover letter');
+        }
+
+        // Get the blob from the response
+        const blob = await response.blob();
+        
+        // Create a download link
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'cover_letter.docx';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    } catch (error) {
+        console.error('Error downloading cover letter:', error);
+        alert('Failed to download cover letter. Please try again.');
+    }
 });
 
 // Reset state when popup is opened
