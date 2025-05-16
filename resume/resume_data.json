@@ -1,0 +1,121 @@
+{
+    "name": "FNU Aakash",
+    "contact": {
+      "phone": "+1 (623) 341-5438",
+      "email": "anola207@asu.edu",
+      "location": "Tempe, AZ, USA",
+      "linkedin": "https://linkedin.com/in/aakashgangji",
+      "portfolio": "https://aakashgangji.vip",
+      "musicSite": "https://aakashmusic.co"
+    },
+    "education": [
+      {
+        "school": "Arizona State University",
+        "degree": "Master of Science in Information Technology",
+        "startDate": "August 2023",
+        "endDate": "May 2025",
+        "gpa": "4.0",
+        "courses": [
+          "Cloud Architecture",
+          "Cloud Operation and Security",
+          "Network Forensics",
+          "Middleware Programming and Security"
+        ]
+      },
+      {
+        "school": "Poojya Doddappa Appa College of Engineering",
+        "degree": "Bachelor of Engineering in Computer Science",
+        "startDate": "August 2018",
+        "endDate": "May 2022",
+        "gpa": "8.9",
+        "courses": [
+          "Data Structures & Algorithms",
+          "Artificial Intelligence",
+          "Database Management Systems",
+          "Object Oriented Programming"
+        ]
+      }
+    ],
+    "experience": [
+      {
+        "title": "Teaching Assistant",
+        "company": "Arizona State University",
+        "location": "Tempe, AZ, USA",
+        "startDate": "July 2024",
+        "endDate": "Present",
+        "responsibilities": [
+          "Teaching Assistant for the course Introduction to Network Information Communication Technology",
+          "Conducted review sessions and office hours",
+          "Collaborated with faculty to refine course curriculum",
+          "Graded assignments and final exams, providing feedback"
+        ]
+      }
+    ],
+    "projects": [
+      {
+        "name": "Faith - Hack SoDA (1st Place)",
+        "technologies": ["Python", "LLM", "React", "AWS EC2", "FastAPI"],
+        "description": [
+          "Built an AI-powered domain analysis tool using GPT-4",
+          "Developed a user-friendly React frontend",
+          "Created a Chrome extension for domain safety",
+          "Implemented FastAPI backend for efficient data processing"
+        ]
+      },
+      {
+        "name": "Tom Riddle’s Diary – Innovation Hacks (3rd Place)",
+        "technologies": ["Python", "LLM", "React", "FastAPI", "PyTorch"],
+        "description": [
+          "Inspired by Harry Potter, built an interactive AI diary",
+          "Enabled long-term memory using ChromaDB and semantic search",
+          "Used GenAI and PyTorch models for empathetic responses",
+          "Crafted a magical disappearing input experience on frontend"
+        ]
+      },
+      {
+        "name": "Melodia – Sunhacks 2024 (2nd Place)",
+        "technologies": ["Python", "Music Theory", "AWS EC2", "S3", "Flask"],
+        "description": [
+          "Developed a tool to enhance songs with matching instrumental tracks",
+          "Used music theory to analyze pitch, scale, and tempo",
+          "No ML/AI used, purely theory-driven audio engineering"
+        ]
+      },
+      {
+        "name": "The Vizards – OHack 2024 (Top 5)",
+        "technologies": ["React", "Flask", "LLM", "REST API", "MySQL"],
+        "description": [
+          "Built a React dashboard for Habitat for Humanity",
+          "Simplified survey analysis for non-technical users",
+          "Integrated ‘Ask Wizard’ for NLP-based data queries"
+        ]
+      },
+      {
+        "name": "Environmental Sound Classification",
+        "recognition": "Finalist – CSI-InApp International Project Awards 2022",
+        "technologies": ["CNN", "ReLU", "Python"],
+        "description": [
+          "Classified Human, Animal, and Vehicle sounds",
+          "Used convolutional neural networks and data augmentation"
+        ]
+      }
+    ],
+    "certifications": [
+      "AWS Academy Cloud Architecting",
+      "AWS Cloud Operations",
+      "AWS Cloud Security Foundations",
+      "Runner-up AWS JAM-ASU 2024",
+      "Google Cloud Certified",
+      "NPTEL Certification in IoT"
+    ],
+    "skills": {
+      "languages": ["Python", "C", "C++", "SQL", "JavaScript", "PHP", "HTML", "CSS"],
+      "frameworks": ["ReactJs", "NodeJs", "Flask", "WordPress"],
+      "tools": [
+        "Docker", "AWS", "Git", "Google Cloud Platform", "CI/CD", "Azure",
+        "Postman", "Wireshark", "Linux", "Unix", "Shell Scripting"
+      ],
+      "concepts": ["LLM", "REST API", "Agile", "Scrum", "Version Control"]
+    }
+  }
+  

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CoverGenie</title>
+  <style>
+    body {
+      width: 400px;
+      padding: 15px;
+      font-family: Arial, sans-serif;
+    }
+    .preview-box {
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      max-height: 100px;
+      overflow-y: auto;
+    }
+    .error-message {
+      color: #d32f2f;
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #d32f2f;
+      border-radius: 4px;
+      display: none;
+    }
+    .cover-letter {
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #4caf50;
+      border-radius: 4px;
+      white-space: pre-wrap;
+      display: none;
+    }
+    .cover-letter.editable {
+      background-color: #fff;
+      min-height: 200px;
+    }
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      flex: 1;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    button.secondary {
+      background-color: #2196F3;
+    }
+    button.secondary:hover {
+      background-color: #1976D2;
+    }
+    button:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <h2>CoverGenie</h2>
+  <div id="preview" class="preview-box">
+    <h3>Job Description Preview:</h3>
+    <div id="preview-text"></div>
+  </div>
+  <div id="error" class="error-message"></div>
+  <div id="cover-letter" class="cover-letter" contenteditable="false"></div>
+  <div class="button-group">
+    <button id="generate">Generate Cover Letter</button>
+    <button id="edit" class="secondary" style="display: none;">Edit</button>
+    <button id="save" class="secondary" style="display: none;">Save</button>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
