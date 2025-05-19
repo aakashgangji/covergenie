@@ -46,8 +46,8 @@ ollama pull mistral
 
 1. Start the backend server:
 ```bash
-cd backend
-uvicorn main:app --reload
+# Make sure you're in the root directory of the project (where you can see both backend/ and resume/ folders)
+uvicorn backend.main:app --reload
 ```
 
 2. Navigate to a LinkedIn job posting
