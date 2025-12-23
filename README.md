@@ -32,12 +32,12 @@ pip install -r requirements.txt
 ```
 
 3. Configure Groq API key:
-   - Open `backend/utils/ollama.py`
-   - Replace the `GROQ_API_KEY` value with your Groq API key:
-   ```python
-   GROQ_API_KEY = "your-groq-api-key-here"
+   - Create a `.env` file in the root directory of the project
+   - Add your Groq API key to the `.env` file:
+   ```bash
+   GROQ_API_KEY=your-groq-api-key-here
    ```
-   - Save the file
+   - The `.env` file is already in `.gitignore` and will not be committed to the repository
 
 4. Load the Chrome extension:
    - Open Chrome and go to `chrome://extensions/`
