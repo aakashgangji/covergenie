@@ -16,7 +16,7 @@ CoverGenie is a Chrome extension that automatically generates personalized cover
 
 - Python 3.9 or higher
 - Chrome browser
-- Groq API key (configured in the code)
+- Groq API key (get one at [https://console.groq.com](https://console.groq.com))
 
 ## Installation
 
@@ -31,7 +31,15 @@ cd covergenie
 pip install -r requirements.txt
 ```
 
-3. Load the Chrome extension:
+3. Configure Groq API key:
+   - Open `backend/utils/ollama.py`
+   - Replace the `GROQ_API_KEY` value with your Groq API key:
+   ```python
+   GROQ_API_KEY = "your-groq-api-key-here"
+   ```
+   - Save the file
+
+4. Load the Chrome extension:
    - Open Chrome and go to `chrome://extensions/`
    - Enable "Developer mode"
    - Click "Load unpacked"
