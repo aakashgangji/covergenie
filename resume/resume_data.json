@@ -1,121 +1,169 @@
 {
-    "name": "FNU Aakash",
-    "contact": {
-      "phone": "xxx",
-      "email": "anola207@asu.edu",
-      "location": "Tempe, AZ, USA",
-      "linkedin": "https://linkedin.com/in/aakashgangji",
-      "portfolio": "https://aakashgangji.vip",
-      "musicSite": "https://aakashmusic.co"
+  "basics": {
+    "name": "Aakash",
+    "label": "AI Software Engineer and Cloud Practitioner",
+    "email": "gangjiaakash@gmail.com",
+    "phone": "1234567890",
+    "url": "aakashgangji.vip",
+    "location": {
+      "city": "Tempe",
+      "region": "AZ",
+      "countryCode": "USA"
     },
-    "education": [
+    "profiles": [
       {
-        "school": "Arizona State University",
-        "degree": "Master of Science in Information Technology",
-        "startDate": "August 2023",
-        "endDate": "May 2025",
-        "gpa": "4.0",
-        "courses": [
-          "Cloud Architecture",
-          "Cloud Operation and Security",
-          "Network Forensics",
-          "Middleware Programming and Security"
-        ]
-      },
-      {
-        "school": "Poojya Doddappa Appa College of Engineering",
-        "degree": "Bachelor of Engineering in Computer Science",
-        "startDate": "August 2018",
-        "endDate": "May 2022",
-        "gpa": "8.9",
-        "courses": [
-          "Data Structures & Algorithms",
-          "Artificial Intelligence",
-          "Database Management Systems",
-          "Object Oriented Programming"
-        ]
+        "network": "LinkedIn",
+        "url": "linkedin.com/in/aakashgangji"
       }
     ],
-    "experience": [
-      {
-        "title": "Teaching Assistant",
-        "company": "Arizona State University",
-        "location": "Tempe, AZ, USA",
-        "startDate": "July 2024",
-        "endDate": "May 2025",
-        "responsibilities": [
-          "Teaching Assistant for the course Introduction to Network Information Communication Technology",
-          "Conducted review sessions and office hours",
-          "Collaborated with faculty to refine course curriculum",
-          "Graded assignments and final exams, providing feedback"
-        ]
-      }
-    ],
-    "projects": [
-      {
-        "name": "Faith - Hack SoDA (1st Place)",
-        "technologies": ["Python", "LLM", "React", "AWS EC2", "FastAPI"],
-        "description": [
-          "Built an AI-powered domain analysis tool using GPT-4",
-          "Developed a user-friendly React frontend",
-          "Created a Chrome extension for domain safety",
-          "Implemented FastAPI backend for efficient data processing"
-        ]
-      },
-      {
-        "name": "Tom Riddle’s Diary – Innovation Hacks (3rd Place)",
-        "technologies": ["Python", "LLM", "React", "FastAPI", "PyTorch"],
-        "description": [
-          "Inspired by Harry Potter, built an interactive AI diary",
-          "Enabled long-term memory using ChromaDB and semantic search",
-          "Used GenAI and PyTorch models for empathetic responses",
-          "Crafted a magical disappearing input experience on frontend"
-        ]
-      },
-      {
-        "name": "Melodia – Sunhacks 2024 (2nd Place)",
-        "technologies": ["Python", "Music Theory", "AWS EC2", "S3", "Flask"],
-        "description": [
-          "Developed a tool to enhance songs with matching instrumental tracks",
-          "Used music theory to analyze pitch, scale, and tempo",
-          "No ML/AI used, purely theory-driven audio engineering"
-        ]
-      },
-      {
-        "name": "The Vizards – OHack 2024 (Top 5)",
-        "technologies": ["React", "Flask", "LLM", "REST API", "MySQL"],
-        "description": [
-          "Built a React dashboard for Habitat for Humanity",
-          "Simplified survey analysis for non-technical users",
-          "Integrated ‘Ask Wizard’ for NLP-based data queries"
-        ]
-      },
-      {
-        "name": "Environmental Sound Classification",
-        "recognition": "Finalist – CSI-InApp International Project Awards 2022",
-        "technologies": ["CNN", "ReLU", "Python"],
-        "description": [
-          "Classified Human, Animal, and Vehicle sounds",
-          "Used convolutional neural networks and data augmentation"
-        ]
-      }
-    ],
-    "certifications": [
-      "AWS Academy Cloud Architecting",
-      "AWS Cloud Operations",
-      "AWS Cloud Security Foundations",
-      "Runner-up AWS JAM-ASU 2024",
-      "Google Cloud Certified",
-      "NPTEL Certification in IoT"
-    ],
-    "skills": {
-      "languages": ["Python", "C", "C++", "SQL", "JavaScript", "PHP", "HTML", "CSS"],
-      "frameworks": ["ReactJs", "NodeJs", "Flask", "WordPress"],
-      "tools": [
-        "Docker", "AWS", "Git", "Google Cloud Platform", "CI/CD", "Azure",
-        "Postman", "Wireshark", "Linux", "Unix", "Shell Scripting"
-      ],
-      "concepts": ["LLM", "REST API", "Agile", "Scrum", "Version Control"]
+    "summary": "AI Software Engineer and Cloud Practitioner with over 2 years of experience architecting scalable data and AI platforms. Proven track record leading teams to deploy agentic AI solutions and Generative AI microservices. Expert in Python, AWS/GCP, and RAG workflows, with a focus on building autonomous decision-making systems for non-profits and financial sectors."
+  },
+  "work": [
+    {
+      "name": "Saayam For All",
+      "position": "Lead AI Developer",
+      "location": "Tempe, AZ, USA",
+      "startDate": "2025-06",
+      "endDate": "Present",
+      "highlights": [
+        "Architected and led the organization's first AI chatbot on AWS EKS with Kafka, ensuring high performance and reliability.",
+        "Mentored developers on AI and LLMs, deploying agentic workflows with LangChain and Python.",
+        "Designed scalable data pipelines to support retrieval-augmented generation (RAG) features, integrating REST APIs and AWS Lambda for adaptive task execution.",
+        "Orchestrated cloud operations and infrastructure using AWS Lambda, API Gateway, and CloudWatch, ensuring high availability for critical services.",
+        "Implemented automated testing & maintained robust CI/CD pipelines to ensure code quality & rapid deployment cycles."
+      ]
+    },
+    {
+      "name": "Aradhana Financers",
+      "position": "Junior Software Engineer",
+      "location": "Karnataka, India",
+      "startDate": "2022-07",
+      "endDate": "2023-08",
+      "highlights": [
+        "Enhanced CX by delivering Agile software enhancements that improved financial reporting dashboards.",
+        "Built and maintained financial software applications for loan processing and payments, ensuring strict compliance with RBI.",
+        "Optimized SQL databases and APIs to accelerate financial transactions and banking integrations.",
+        "Developed Python and SQL data analytics modules to automate dashboards, boosting decision-making efficiency by 35%."
+      ]
     }
-  }
-  
+  ],
+  "projects": [
+    {
+      "name": "DomainDNA (Agentic AI Security Tool)",
+      "description": "1st Place, Hack SoDA",
+      "techStack": ["Python", "LLM", "React", "AWS EC2", "FastAPI"],
+      "highlights": [
+        "Engineered the 'Faith Engine,' an autonomous AI agent capable of reasoning and risk assessment for domain history analysis using GPT-4 and FastAPI.",
+        "Demoed thought leadership in AI safety by building a real-time decision support system for browser security.",
+        "Built a responsive frontend using React, focusing on user-friendly design and intuitive interface.",
+        "Created a Chrome browser extension for real-time domain safety checks.",
+        "Implemented a robust backend using FastAPI for efficient data processing and analysis."
+      ]
+    },
+    {
+      "name": "Secure Task Management Systems",
+      "techStack": ["NestJS", "Angular", "TypeScript", "SQLite", "JWT", "RBAC", "ETL", "CRMS"],
+      "highlights": [
+        "Built a full-stack task and customer management system with secure role-based access and automated workflows.",
+        "Designed ETL pipelines for user data migration, audit logs, and workflow synchronization with optimized batch jobs.",
+        "Integrated CRMS features for customer lifecycle tracking, task automation, and performance analytics.",
+        "Engineered a scalable NestJS backend with TypeORM, JWT auth, and automated CI/CD deployment pipeline."
+      ]
+    },
+    {
+      "name": "Habitat for Humanity",
+      "description": "Top 5 in O'Hack 2024",
+      "techStack": ["React", "Flask", "LLM", "Rest API", "MySQL"],
+      "highlights": [
+        "Developed a comprehensive React dashboard application for Habitat for Humanity a US Based non-profit organization, enabling employees to efficiently manage surveys, analyze data, and gain insights.",
+        "Built an AI-driven decision support system using RAG (Retrieval-Augmented Generation) to allow non-technical stakeholders to query complex survey data via natural language."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Arizona State University",
+      "area": "Master of Science in Information Technology",
+      "startDate": "2023-08",
+      "endDate": "2025-05",
+      "score": "4.0 GPA",
+      "courses": [
+        "Data Science",
+        "Cloud Architecture & Operations",
+        "Machine Learning",
+        "Network Forensics",
+        "Middleware prog. and Security"
+      ]
+    },
+    {
+      "institution": "Poojya Doddappa Appa College of Engineering",
+      "area": "Bachelor's of Engineering in Computer Science",
+      "startDate": "2018-08",
+      "endDate": "2022-05",
+      "score": "8.9 GPA",
+      "courses": [
+        "Data Structures & Algorithms",
+        "AI",
+        "Database Management Systems",
+        "Object Oriented Programming",
+        "Web Development"
+      ]
+    }
+  ],
+  "skills": [
+    "Python",
+    "Django",
+    "LLM (Large Language Model)",
+    "AWS (Amazon web services)",
+    "Kubernetes",
+    "Kafka",
+    "Hadoop",
+    "TensorFlow",
+    "PyTorch",
+    "LangChain",
+    "RAG",
+    "Autonomous Agents",
+    "C",
+    "C++",
+    "SQL",
+    "JavaScript",
+    "PHP",
+    "HTML",
+    "CSS",
+    "TypeScript",
+    "ReactJs",
+    "NodeJs",
+    "Flask",
+    "WordPress",
+    "Docker",
+    "Git",
+    "Google Cloud Platform",
+    "CI/CD",
+    "Azure",
+    "Version control",
+    "Postman",
+    "REST API",
+    "Scrum",
+    "Agile methodologies",
+    "Jira",
+    "Selenium",
+    "SDLC",
+    "Linux",
+    "Unix",
+    "Shell Scripting",
+    "NLP",
+    "Matplotlib",
+    "NumPy",
+    "Pandas",
+    "Data Visualization"
+  ],
+  "certifications": [
+    "Google cloud certified",
+    "Research Publication",
+    "AWS academy Cloud Architecting",
+    "AWS Cloud Operations",
+    "AWS Cloud Security Foundations",
+    "Runner up AWS JAM-ASU 2024",
+    "NPTEL online certification in IOT"
+  ]
+}

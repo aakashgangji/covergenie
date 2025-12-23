@@ -17,18 +17,65 @@ document.getElementById("generate").addEventListener("click", async () => {
     generateButton.disabled = true;
     generateButton.textContent = "Generating...";
   
-    chrome.tabs.sendMessage(tab.id, { action: "EXTRACT_JOB" }, async (response) => {
-      if (chrome.runtime.lastError || !response || !response.payload) {
-        errorDiv.textContent = "Failed to extract job data.";
+    // Helper function to send message with retry
+    const sendMessageWithRetry = () => {
+      return new Promise((resolve, reject) => {
+        chrome.tabs.sendMessage(tab.id, { action: "EXTRACT_JOB" }, (response) => {
+          if (chrome.runtime.lastError) {
+            // If content script isn't loaded, try to inject it
+            if (chrome.runtime.lastError.message.includes("Could not establish connection")) {
+              chrome.scripting.executeScript({
+                target: { tabId: tab.id },
+                files: ['content.js']
+              }).then(() => {
+                // Wait a bit for script to initialize, then retry
+                setTimeout(() => {
+                  chrome.tabs.sendMessage(tab.id, { action: "EXTRACT_JOB" }, (retryResponse) => {
+                    if (chrome.runtime.lastError) {
+                      reject(new Error(chrome.runtime.lastError.message));
+                    } else if (!retryResponse || !retryResponse.payload) {
+                      reject(new Error("No response from content script"));
+                    } else {
+                      resolve(retryResponse.payload);
+                    }
+                  });
+                }, 500);
+              }).catch((err) => {
+                reject(new Error(`Failed to inject content script: ${err.message}`));
+              });
+            } else {
+              reject(new Error(chrome.runtime.lastError.message));
+            }
+          } else if (!response || !response.payload) {
+            reject(new Error("No response or payload received"));
+          } else {
+            resolve(response.payload);
+          }
+        });
+      });
+    };
+
+    try {
+      const jobData = await sendMessageWithRetry();
+      
+      // Validate extracted data
+      if (!jobData.description || 
+          jobData.description === "Job description not found." || 
+          jobData.description.length < 100) {
+        errorDiv.textContent = `Could not find job description on this page (found ${jobData.description?.length || 0} characters). Please make sure you're viewing a complete job posting page and wait for it to fully load, then try again.`;
         errorDiv.style.display = "block";
         generateButton.disabled = false;
         generateButton.textContent = "Generate Cover Letter";
+        console.log('[CoverGenie] Validation failed:', {
+          hasDescription: !!jobData.description,
+          description: jobData.description?.substring(0, 200),
+          length: jobData.description?.length
+        });
         return;
       }
-  
-      const jobData = response.payload;
       previewText.textContent = jobData.description; // Show full description
-  
+
+      // Continue with API call
       try {
         const res = await fetch("http://localhost:8000/generate", {
           method: "POST",
@@ -60,7 +107,13 @@ document.getElementById("generate").addEventListener("click", async () => {
         generateButton.disabled = false;
         generateButton.textContent = "Generate Cover Letter";
       }
-    });
+    } catch (err) {
+      console.error('[CoverGenie] Error extracting job data:', err);
+      errorDiv.textContent = `Failed to extract job data: ${err.message}. Make sure you're on a job posting page (LinkedIn or Handshake) and try refreshing the page.`;
+      errorDiv.style.display = "block";
+      generateButton.disabled = false;
+      generateButton.textContent = "Generate Cover Letter";
+    }
 });
 
 // Add edit functionality for cover letter

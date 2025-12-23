@@ -1,6 +1,6 @@
 # CoverGenie
 
-CoverGenie is a Chrome extension that automatically generates personalized cover letters using AI. It extracts job descriptions from LinkedIn and generates tailored cover letters using Ollama's Mistral model.
+CoverGenie is a Chrome extension that automatically generates personalized cover letters using AI. It extracts job descriptions from LinkedIn and generates tailored cover letters using Groq's Llama model.
 
 ## Features
 
@@ -9,13 +9,14 @@ CoverGenie is a Chrome extension that automatically generates personalized cover
 - Professional formatting with Times New Roman, 12pt font
 - Download as Microsoft Word (.docx) document
 - Real-time editing of both job description and cover letter
-- Powered by Ollama's Mistral model for high-quality content
+- Powered by Groq's Llama 3.3 70B model for high-quality content
+- Advanced prompt engineering for personalized cover letters
 
 ## Prerequisites
 
 - Python 3.9 or higher
 - Chrome browser
-- Ollama installed locally with Mistral model
+- Groq API key (configured in the code)
 
 ## Installation
 
@@ -30,13 +31,7 @@ cd covergenie
 pip install -r requirements.txt
 ```
 
-3. Install Ollama and Mistral model:
-```bash
-# Install Ollama from https://ollama.ai
-ollama pull mistral
-```
-
-4. Load the Chrome extension:
+3. Load the Chrome extension:
    - Open Chrome and go to `chrome://extensions/`
    - Enable "Developer mode"
    - Click "Load unpacked"
@@ -63,7 +58,7 @@ covergenie/
 ├── backend/
 │   ├── main.py              # FastAPI server
 │   └── utils/
-│       ├── ollama.py        # Ollama integration
+│       ├── ollama.py        # Groq API integration
 │       ├── parser.py        # Text cleaning utilities
 │       └── prompt_builder.py # Cover letter prompt generation
 ├── extension/
@@ -85,10 +80,12 @@ covergenie/
   - 12-point font size
   - Standard paragraph formatting
 
-### Ollama Integration
-- Uses Mistral model for high-quality cover letter generation
+### Groq API Integration
+- Migrated from Ollama/Mistral to Groq's cloud API
+- Uses Llama 3.3 70B Versatile model for high-quality cover letter generation
 - Implements retry mechanism for reliability
-- Optimized prompt engineering for better results
+- Advanced prompt engineering with structured resume formatting
+- Improved personalization by matching candidate qualifications with job requirements
 
 ## Contributing
 
@@ -101,7 +98,7 @@ covergenie/
 
 ## Acknowledgments
 
-- [Ollama](https://ollama.ai) for providing the AI model
+- [Groq](https://groq.com) for providing the AI model API
 - [FastAPI](https://fastapi.tiangolo.com/) for the backend framework
 - [python-docx](https://python-docx.readthedocs.io/) for document generation
 

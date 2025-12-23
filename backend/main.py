@@ -20,7 +20,7 @@ async def generate(request: Request):
         with open("resume/resume_data.json") as f:
             resume_data = json.load(f)
         prompt = build_prompt(resume_data, job_desc, data["company"], data["title"])
-        print("[Prompt Sent to Ollama]:", prompt[:300])
+        print("[Prompt Sent to Groq]:", prompt[:300])
         cover_letter = generate_cover_letter(prompt)
         return JSONResponse({
             "success": True,
