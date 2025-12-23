@@ -41,9 +41,16 @@ pip install -r requirements.txt
 
 4. Load the Chrome extension:
    - Open Chrome and go to `chrome://extensions/`
+      ![Screenshot1](./Screenshots/extensionbutton.png)
+      ![Screenshot1](./Screenshots/manage%20extension.png)
+
    - Enable "Developer mode"
+      ![Screenshot1](./Screenshots/developermode.png)
+
    - Click "Load unpacked"
    - Select the `extension` folder from the project
+      ![Screenshot1](./Screenshots/allextensions.png)
+
 
 ## Usage
 
@@ -53,10 +60,12 @@ pip install -r requirements.txt
 uvicorn backend.main:app --reload
 ```
 
-2. Navigate to a LinkedIn job posting
+2. Navigate to a Handshake job posting
 3. Click the CoverGenie extension icon
 4. Click "Generate Cover Letter"
+  ![Screenshot1](./Screenshots/generate.png)
 5. Edit the generated cover letter if needed
+  ![Screenshot1](./Screenshots/generated.png)
 6. Click "Download" to save as a .docx file
 
 ## Project Structure
