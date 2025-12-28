@@ -15,7 +15,7 @@ GROQ_MODEL = "llama-3.3-70b-versatile"  # Using Groq's Llama model
 
 def generate_cover_letter(prompt: str) -> str:
     max_retries = 3
-    base_delay = 2 
+    base_delay = 2  # Base delay in seconds
     
     for attempt in range(max_retries):
         try:
