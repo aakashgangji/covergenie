@@ -1,68 +1,80 @@
 def format_resume_data(resume_data):
-    """Format resume data into a readable string for the prompt."""
+    """Format resume data into a readable string for the prompt. Matches resume_data.json structure."""
     formatted = []
-    
-    # Name and Contact
-    formatted.append(f"Name: {resume_data.get('name', 'N/A')}")
-    if 'contact' in resume_data:
-        contact = resume_data['contact']
+
+    # Contact (name, email, location, linkedin, website)
+    if "contact" in resume_data:
+        contact = resume_data["contact"]
+        formatted.append(f"Name: {contact.get('name', 'N/A')}")
         formatted.append(f"Email: {contact.get('email', 'N/A')}")
         formatted.append(f"Location: {contact.get('location', 'N/A')}")
-    
-    # Education
-    if 'education' in resume_data and resume_data['education']:
+        if contact.get("linkedin"):
+            formatted.append(f"LinkedIn: {contact.get('linkedin')}")
+        if contact.get("website"):
+            formatted.append(f"Website: {contact.get('website')}")
+
+    # Professional Summary
+    if resume_data.get("professional_summary"):
+        formatted.append("\n## Professional Summary:")
+        formatted.append(resume_data["professional_summary"])
+
+    # Education (institution, degree, gpa, period)
+    if resume_data.get("education"):
         formatted.append("\n## Education:")
-        for edu in resume_data['education']:
-            formatted.append(f"- {edu.get('degree', '')} from {edu.get('school', '')}")
-            if 'gpa' in edu:
-                formatted.append(f"  GPA: {edu.get('gpa', '')}")
-            if 'courses' in edu and edu['courses']:
-                formatted.append(f"  Relevant Courses: {', '.join(edu['courses'][:5])}")
-    
-    # Experience
-    if 'experience' in resume_data and resume_data['experience']:
+        for edu in resume_data["education"]:
+            line = f"- {edu.get('degree', '')} from {edu.get('institution', '')}"
+            if edu.get("period"):
+                line += f" ({edu['period']})"
+            formatted.append(line)
+            if edu.get("gpa"):
+                formatted.append(f"  GPA: {edu['gpa']}")
+
+    # Experience (company, role, location, period, responsibilities)
+    if resume_data.get("experience"):
         formatted.append("\n## Professional Experience:")
-        for exp in resume_data['experience']:
-            formatted.append(f"- {exp.get('title', '')} at {exp.get('company', '')}")
-            if 'responsibilities' in exp and exp['responsibilities']:
-                for resp in exp['responsibilities'][:3]:
+        for exp in resume_data["experience"]:
+            formatted.append(f"- {exp.get('role', '')} at {exp.get('company', '')}")
+            if exp.get("location"):
+                formatted.append(f"  Location: {exp['location']}")
+            if exp.get("period"):
+                formatted.append(f"  Period: {exp['period']}")
+            if exp.get("responsibilities"):
+                for resp in exp["responsibilities"][:4]:
                     formatted.append(f"  • {resp}")
-    
-    # Projects
-    if 'projects' in resume_data and resume_data['projects']:
+
+    # Projects (name, achievement, description)
+    if resume_data.get("projects"):
         formatted.append("\n## Key Projects:")
-        for proj in resume_data['projects'][:3]:
+        for proj in resume_data["projects"]:
             formatted.append(f"- {proj.get('name', '')}")
-            if 'description' in proj and proj['description']:
-                formatted.append(f"  {proj['description'][0]}")
-            if 'technologies' in proj and proj['technologies']:
-                formatted.append(f"  Technologies: {', '.join(proj['technologies'][:5])}")
-    
-    # Skills
-    if 'skills' in resume_data:
-        skills = resume_data['skills']
-        skill_list = []
-        if 'languages' in skills:
-            skill_list.extend(skills['languages'])
-        if 'frameworks' in skills:
-            skill_list.extend(skills['frameworks'])
-        if 'tools' in skills:
-            skill_list.extend(skills['tools'])
-        if skill_list:
-            formatted.append(f"\n## Technical Skills: {', '.join(skill_list[:15])}")
-    
-    # Certifications
-    if 'certifications' in resume_data and resume_data['certifications']:
-        formatted.append(f"\n## Certifications: {', '.join(resume_data['certifications'][:5])}")
-    
+            if proj.get("achievement"):
+                formatted.append(f"  Achievement: {proj['achievement']}")
+            if proj.get("description"):
+                for desc in proj["description"][:3]:
+                    formatted.append(f"  • {desc}")
+
+    # Skills & Certifications (nested categories)
+    if resume_data.get("skills_certifications"):
+        formatted.append("\n## Skills & Certifications:")
+        skills = resume_data["skills_certifications"]
+        for category, items in skills.items():
+            if items:
+                label = category.replace("_", " ").title()
+                formatted.append(f"  {label}: {', '.join(items[:8])}")
+
+    # Publications & Certifications (flat list)
+    if resume_data.get("publications_certifications"):
+        formatted.append("\n## Publications & Certifications:")
+        formatted.append(", ".join(resume_data["publications_certifications"][:8]))
+
     return "\n".join(formatted)
 
 
 def build_prompt(resume_data, job_desc, company, title):
-    """Build a comprehensive prompt for cover letter generation."""
+    """Build a comprehensive prompt for cover letter generation based on resume_data.json structure."""
     formatted_resume = format_resume_data(resume_data)
-    
-    prompt = f"""You are an expert career coach and professional writer specializing in creating compelling, personalized cover letters. Your task is to write a cover letter that effectively bridges the candidate's qualifications with the specific job requirements.
+
+    prompt = f"""You are an expert career coach and professional writer. Write a cover letter that connects this candidate's profile to the job. Use only the information provided in the candidate profile below.
 
 ## CANDIDATE PROFILE:
 {formatted_resume}
@@ -75,32 +87,31 @@ def build_prompt(resume_data, job_desc, company, title):
 {job_desc}
 
 ## INSTRUCTIONS:
-Write a professional cover letter that:
+Write a professional, ATS-friendly cover letter that:
 
-1. **Salutation:** Use exactly "Dear Hiring Manager," (do not include the company name)
+1. **Salutation:** Use exactly "To the Hiring Manager," (do not add the company name).
 
-2. **Body Paragraph:** Write exactly ONE paragraph containing 4-5 well-crafted sentences that:
-   - Opens with a strong statement expressing genuine interest in the position
-   - Highlights 2-3 specific qualifications from the candidate's background that directly match the job requirements
-   - Demonstrates understanding of the role and company needs
-   - Conveys enthusiasm and value proposition
-   - Uses specific examples from the candidate's experience, projects, or skills when relevant
+2. **Body:** Write exactly ONE paragraph of 4–5 sentences that:
+   - Opens with a clear statement of interest in this role and company.
+   - Ties the candidate's professional summary and experience (e.g., data analysis, ETL, dashboards, SQL, Python, Tableau, Power BI) to the job requirements.
+   - Mentions 1–2 concrete outcomes (e.g., retention improvement, automation, data quality) from their experience or projects.
+   - Shows understanding of the role and how the candidate would add value.
 
-3. **Closing:** End with "Sincerely," followed by a blank line
+3. **Closing:** End with "Sincerely," then a blank line (no name or signature line).
 
-4. **Tone:** Professional, confident, and authentic. Avoid generic phrases. Be specific about how the candidate's background aligns with the role.
+4. **Tone:** Professional, confident, and specific. No generic filler. Match wording to the job description where it fits naturally.
 
-5. **Length:** The entire cover letter should be concise - one paragraph only, no more than 5 sentences.
+5. **Length:** One paragraph only; no more than 5 sentences total.
 
 ## OUTPUT FORMAT:
 Dear Hiring Manager,
 
-[Write your one paragraph here with 4-5 sentences]
+[One paragraph, 4–5 sentences]
 
 Sincerely,
 
 ---
 
-IMPORTANT: Only output the cover letter text. Do not include any explanations, notes, or additional commentary. The output should be ready to use as-is."""
+IMPORTANT: Output only the cover letter text. No explanations, notes, or extra commentary. The text must be ready to paste or download as-is."""
 
     return prompt

@@ -1,163 +1,110 @@
 {
-  "basics": {
-    "name": "Aakash",
-    "label": "AI Software Engineer and Cloud Practitioner",
-    "email": "gangjiaakash@gmail.com",
-    "phone": "1234567890",
-    "url": "aakashgangji.vip",
-    "location": {
-      "city": "Tempe",
-      "region": "AZ",
-      "countryCode": "USA"
-    },
-    "profiles": [
-      {
-        "network": "LinkedIn",
-        "url": "linkedin.com/in/aakashgangji"
-      }
-    ],
-    "summary": "AI Software Engineer and Cloud Practitioner with over 2 years of experience architecting scalable data and AI platforms. Proven track record leading teams to deploy agentic AI solutions and Generative AI microservices. Expert in Python, AWS/GCP, and RAG workflows, with a focus on building autonomous decision-making systems for non-profits and financial sectors."
+  "contact": {
+    "name": "AAKASH",
+    "phone": "xxx",
+    "email": "anola207@asu.edu",
+    "location": "USA",
+    "linkedin": "linkedin.com/in/aakashgangji",
+    "website": "aakashgangji.vip"
   },
-  "work": [
+  "professional_summary": "Data Analyst and Master’s Graduate with 3+ years of experience transforming complex datasets into actionable business insights. Expert in the full data lifecycle,from ETL and Data Cleaning to Statistical Analysis and Visualization. Proficient in SQL, Python, Tableau, and Power BI. Proven track record of identifying operational inefficiencies and building automated reporting solutions that drive revenue growth and cost savings. Strong communicator skilled in presenting data stories to non-technical stakeholders.",
+  "skills_certifications": {
+    "data_analysis_statistics": [
+      "SQL (Advanced)",
+      "Python (Pandas, NumPy, Scipy)",
+      "R",
+      "Excel (Advanced Macros/VBA, Pivot Tables)",
+      "A/B Testing",
+      "Hypothesis Testing",
+      "Regression Analysis"
+    ],
+    "data_visualization": [
+      "Tableau",
+      "Power BI",
+      "Looker",
+      "Google Data Studio",
+      "Matplotlib",
+      "Seaborn",
+      "QlikView",
+      "Dashboard Design"
+    ],
+    "data_engineering_etl": [
+      "ETL Pipelines",
+      "Snowflake",
+      "BigQuery",
+      "AWS",
+      "Apache Airflow",
+      "Kafka",
+      "Data Warehousing"
+    ],
+    "business_intelligence": [
+      "KPI Tracking",
+      "Ad-hoc Reporting",
+      "Requirement Gathering",
+      "Data Governance",
+      "Google Analytics"
+    ]
+  },
+  "experience": [
     {
-      "name": "Saayam For All",
-      "position": "Lead AI Developer",
-      "location": "Tempe, AZ, USA",
-      "startDate": "2025-06",
-      "endDate": "Present",
-      "highlights": [
-        "Architected and led the organization's first AI chatbot on AWS EKS with Kafka, ensuring high performance and reliability.",
-        "Mentored developers on AI and LLMs, deploying agentic workflows with LangChain and Python.",
-        "Designed scalable data pipelines to support retrieval-augmented generation (RAG) features, integrating REST APIs and AWS Lambda for adaptive task execution.",
-        "Orchestrated cloud operations and infrastructure using AWS Lambda, API Gateway, and CloudWatch, ensuring high availability for critical services.",
-        "Implemented automated testing & maintained robust CI/CD pipelines to ensure code quality & rapid deployment cycles."
+      "company": "Saayam For All",
+      "role": "Lead Data Analyst",
+      "location": "Remote, USA",
+      "period": "June 2025 – Present",
+      "responsibilities": [
+        "Designed and deployed interactive dashboards to track user engagement KPIs, providing leadership with real-time visibility into program performance.",
+        "Architected automated ETL pipelines using Python AND SQL to ingest raw data from disparate sources, cleaning and transforming it for downstream analytics.",
+        "Analyzed user behavior trends to identify drop-off points, presenting data-driven recommendations that improved user retention by 40%.",
+        "Established data quality standards and validation protocols, ensuring 99.9% accuracy in beneficiary reporting and compliance data.",
+        "Collaborated with non-technical stakeholders to define reporting requirements, translating business questions into complex SQL queries and actionable visualizations."
       ]
     },
     {
-      "name": "Aradhana Financers",
-      "position": "Junior Software Engineer",
+      "company": "Aradhana Financers",
+      "role": "Data Analyst",
       "location": "Karnataka, India",
-      "startDate": "2022-07",
-      "endDate": "2023-08",
-      "highlights": [
-        "Enhanced CX by delivering Agile software enhancements that improved financial reporting dashboards.",
-        "Built and maintained financial software applications for loan processing and payments, ensuring strict compliance with RBI.",
-        "Optimized SQL databases and APIs to accelerate financial transactions and banking integrations.",
-        "Developed Python and SQL data analytics modules to automate dashboards, boosting decision-making efficiency by 35%."
+      "period": "July 2021 – Aug 2023",
+      "responsibilities": [
+        "Automated the generation of daily financial reports using Excel Macros (VBA) and SQL, reducing manual data entry time by 35%.",
+        "Performed rigorous data cleansing and normalization on legacy financial records, migrating data to a modern relational database environment.",
+        "Analyzed loan processing workflows to identify bottlenecks, utilizing data evidence to propose process improvements that increased throughput.",
+        "Managed and optimized SQL queries for large-scale transaction datasets, ensuring efficient data retrieval for ad-hoc business requests."
       ]
     }
   ],
   "projects": [
     {
-      "name": "DomainDNA (Agentic AI Security Tool)",
-      "description": "1st Place, Hack SoDA",
-      "techStack": ["Python", "LLM", "React", "AWS EC2", "FastAPI"],
-      "highlights": [
-        "Engineered the 'Faith Engine,' an autonomous AI agent capable of reasoning and risk assessment for domain history analysis using GPT-4 and FastAPI.",
-        "Demoed thought leadership in AI safety by building a real-time decision support system for browser security.",
-        "Built a responsive frontend using React, focusing on user-friendly design and intuitive interface.",
-        "Created a Chrome browser extension for real-time domain safety checks.",
-        "Implemented a robust backend using FastAPI for efficient data processing and analysis."
-      ]
-    },
-    {
-      "name": "Secure Task Management Systems",
-      "techStack": ["NestJS", "Angular", "TypeScript", "SQLite", "JWT", "RBAC", "ETL", "CRMS"],
-      "highlights": [
-        "Built a full-stack task and customer management system with secure role-based access and automated workflows.",
-        "Designed ETL pipelines for user data migration, audit logs, and workflow synchronization with optimized batch jobs.",
-        "Integrated CRMS features for customer lifecycle tracking, task automation, and performance analytics.",
-        "Engineered a scalable NestJS backend with TypeORM, JWT auth, and automated CI/CD deployment pipeline."
-      ]
-    },
-    {
       "name": "Habitat for Humanity",
-      "description": "Top 5 in O'Hack 2024",
-      "techStack": ["React", "Flask", "LLM", "Rest API", "MySQL"],
-      "highlights": [
-        "Developed a comprehensive React dashboard application for Habitat for Humanity a US Based non-profit organization, enabling employees to efficiently manage surveys, analyze data, and gain insights.",
-        "Built an AI-driven decision support system using RAG (Retrieval-Augmented Generation) to allow non-technical stakeholders to query complex survey data via natural language."
+      "achievement": "Top 5 in O’Hack 2024",
+      "description": [
+        "Built a comprehensive data visualization tool to help stakeholders analyze survey data, utilizing best practices in dashboard design.",
+        "Processed demographic data to highlight community impact, enabling the organization to secure funding through data-backed proposals."
+      ]
+    },
+    {
+      "name": "DomainDNA (Agentic AI Security Tool)",
+      "achievement": "1st Place, Hack SoDA",
+      "description": [
+        "Developed a risk scoring model using statistical analysis and Python, identifying patterns in unstructured web data to predict domain safety.",
+        "Handled the extraction and transformation of large web-scrape datasets, preparing them for analytical modeling."
       ]
     }
   ],
   "education": [
     {
       "institution": "Arizona State University",
-      "area": "Master of Science in Information Technology",
-      "startDate": "2023-08",
-      "endDate": "2025-05",
-      "score": "4.0 GPA",
-      "courses": [
-        "Data Science",
-        "Cloud Architecture & Operations",
-        "Machine Learning",
-        "Network Forensics",
-        "Middleware prog. and Security"
-      ]
+      "degree": "Master of Science in Information Technology",
+      "gpa": "4.0",
+      "period": "August 2023 – May 2025"
     },
     {
       "institution": "Poojya Doddappa Appa College of Engineering",
-      "area": "Bachelor's of Engineering in Computer Science",
-      "startDate": "2018-08",
-      "endDate": "2022-05",
-      "score": "8.9 GPA",
-      "courses": [
-        "Data Structures & Algorithms",
-        "AI",
-        "Database Management Systems",
-        "Object Oriented Programming",
-        "Web Development"
-      ]
+      "degree": "Bachelor of Engineering in Computer Science",
+      "gpa": "8.9",
+      "period": "August 2018 – May 2022"
     }
   ],
-  "skills": [
-    "Python",
-    "Django",
-    "LLM (Large Language Model)",
-    "AWS (Amazon web services)",
-    "Kubernetes",
-    "Kafka",
-    "Hadoop",
-    "TensorFlow",
-    "PyTorch",
-    "LangChain",
-    "RAG",
-    "Autonomous Agents",
-    "C",
-    "C++",
-    "SQL",
-    "JavaScript",
-    "PHP",
-    "HTML",
-    "CSS",
-    "TypeScript",
-    "ReactJs",
-    "NodeJs",
-    "Flask",
-    "WordPress",
-    "Docker",
-    "Git",
-    "Google Cloud Platform",
-    "CI/CD",
-    "Azure",
-    "Version control",
-    "Postman",
-    "REST API",
-    "Scrum",
-    "Agile methodologies",
-    "Jira",
-    "Selenium",
-    "SDLC",
-    "Linux",
-    "Unix",
-    "Shell Scripting",
-    "NLP",
-    "Matplotlib",
-    "NumPy",
-    "Pandas",
-    "Data Visualization"
-  ],
-  "certifications": [
+  "publications_certifications": [
     "Google cloud certified",
     "Research Publication",
     "AWS academy Cloud Architecting",
