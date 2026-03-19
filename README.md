@@ -1,6 +1,6 @@
 # CoverGenie
 
-CoverGenie is a Chrome extension that automatically generates personalized cover letters using AI. It extracts job descriptions from LinkedIn and generates tailored cover letters using Groq's Llama model.
+CoverGenie is a Chrome extension that automatically generates personalized cover letters using AI and your Resume. It extracts job descriptions from LinkedIn and generates tailored cover letters using Groq's Llama model.
 
 ## Features
 
