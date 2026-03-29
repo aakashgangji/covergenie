@@ -89,23 +89,6 @@ covergenie/
 └── requirements.txt         # Python dependencies
 ```
 
-## Recent Updates
-
-### Document Format Changes
-- Switched from .txt to .docx format for better compatibility
-- Added professional formatting:
-  - Times New Roman font
-  - 12-point font size
-  - Standard paragraph formatting
-
-### Groq API Integration
-- Migrated from Ollama/Mistral to Groq's cloud API
-- Uses Llama 3.3 70B Versatile model for high-quality cover letter generation
-- Implements retry mechanism for reliability
-- Advanced prompt engineering with structured resume formatting
-- Improved personalization by matching candidate qualifications with job requirements
-
-
 ## Acknowledgments
 
 - [Groq](https://groq.com) for providing the AI model API
