@@ -1,3 +1,212 @@
+function normalizeText(text) {
+    return (text || "").replace(/\s+/g, " ").trim();
+}
+
+function isLikelySidebarOrSuggestedText(text) {
+    const lower = text.toLowerCase();
+    const blockedPhrases = [
+        "suggested for you",
+        "filters",
+        "refresh",
+        "how can i leverage",
+        "where can i find roles",
+        "apply directly via handshake",
+        "search",
+        "recommended"
+    ];
+    return blockedPhrases.some((phrase) => lower.includes(phrase));
+}
+
+function trimHandshakeDescriptionBoundaries(text) {
+    if (!text) return text;
+    const source = normalizeText(text);
+    const lower = source.toLowerCase();
+
+    // Start from "job description" when present.
+    const startMarkers = ["job description"];
+    let startIdx = 0;
+    for (const marker of startMarkers) {
+        const idx = lower.indexOf(marker);
+        if (idx !== -1) {
+            startIdx = idx;
+            break;
+        }
+    }
+
+    // Stop at sections that are not part of JD body.
+    const endMarkers = [
+        "what they're looking for",
+        "about the employer",
+        "similar jobs",
+        "save share apply",
+        "at a glance",
+        "matching is based on your profile",
+        "learn more about cohesion labs"
+    ];
+    let endIdx = source.length;
+    for (const marker of endMarkers) {
+        const idx = lower.indexOf(marker, startIdx + 10);
+        if (idx !== -1 && idx < endIdx) {
+            endIdx = idx;
+        }
+    }
+
+    return source.slice(startIdx, endIdx).trim();
+}
+
+function clickHandshakeMoreButton() {
+    if (!window.location.hostname.includes("joinhandshake.com")) {
+        return false;
+    }
+
+    const candidates = Array.from(document.querySelectorAll("button, a, [role='button']"));
+    for (const el of candidates) {
+        const label = normalizeText(el.innerText || el.textContent).toLowerCase();
+        if (label !== "more") {
+            continue;
+        }
+
+        // Prefer "More" controls near job description content.
+        const containerText = normalizeText(el.closest("section, article, div")?.innerText || "").toLowerCase();
+        if (containerText.includes("job description") || containerText.includes("about cohesion labs")) {
+            try {
+                // Guard against detached nodes while the page rerenders.
+                if (el.isConnected) {
+                    el.click();
+                    return true;
+                }
+            } catch (_err) {
+                // Ignore click issues and continue trying other buttons.
+            }
+        }
+    }
+
+    return false;
+}
+
+function expandAllHandshakeMoreButtons() {
+    if (!window.location.hostname.includes("joinhandshake.com")) {
+        return 0;
+    }
+
+    const clickables = Array.from(document.querySelectorAll("button, a, [role='button']"));
+    let clicked = 0;
+    for (const el of clickables) {
+        const label = normalizeText(el.innerText || el.textContent).toLowerCase();
+        if (label === "more" || label === "show more" || label === "read more") {
+            try {
+                if (el.isConnected && !el.disabled) {
+                    el.click();
+                    clicked += 1;
+                }
+            } catch (_err) {
+                // Ignore detached node or transient render errors.
+            }
+        }
+    }
+
+    return clicked;
+}
+
+function isStrongHandshakeDescription(text) {
+    const lower = normalizeText(text).toLowerCase();
+    if (lower.length < 300) return false;
+    if (!lower.includes("job description")) return false;
+
+    const strongMarkers = [
+        "the role",
+        "what you'll do",
+        "requirements",
+        "nice to have",
+        "why cohesion labs",
+        "how to apply"
+    ];
+    const matches = strongMarkers.filter((m) => lower.includes(m)).length;
+    return matches >= 2;
+}
+
+function extractHandshakeDescriptionFromWholePage() {
+    const main = document.querySelector("main") || document.querySelector("[role='main']") || document.body;
+    const full = normalizeText(main?.innerText || "");
+    if (!full) return null;
+
+    const regex = /job description\s*([\s\S]*?)(what they're looking for|about the employer|similar jobs|save share apply|at a glance|$)/i;
+    const match = full.match(regex);
+    if (!match || !match[0]) return null;
+
+    const candidate = normalizeText(`Job description ${match[1] || ""}`);
+    if (candidate.length < 120) return null;
+    if (isLikelySidebarOrSuggestedText(candidate)) return null;
+    return candidate;
+}
+
+function extractHandshakeDescriptionByKeywordWindow() {
+    const full = normalizeText(document.body?.innerText || "");
+    if (!full) return null;
+
+    const lower = full.toLowerCase();
+    const start = lower.indexOf("job description");
+    if (start === -1) return null;
+
+    const endMarkers = ["about the employer", "similar jobs", "what they're looking for"];
+    let end = full.length;
+    for (const marker of endMarkers) {
+        const idx = lower.indexOf(marker, start + 20);
+        if (idx !== -1 && idx < end) {
+            end = idx;
+        }
+    }
+
+    const candidate = normalizeText(full.slice(start, end));
+    if (candidate.length < 150) return null;
+    if (isLikelySidebarOrSuggestedText(candidate)) return null;
+    return candidate;
+}
+
+function extractHandshakeJobDescriptionFromHeadings() {
+    const headingCandidates = Array.from(
+        document.querySelectorAll("h1, h2, h3, h4, [role='heading']")
+    );
+    const targetHeading = headingCandidates.find((el) => {
+        const text = normalizeText(el.innerText).toLowerCase();
+        return text === "job description" || text.includes("job description");
+    });
+
+    if (!targetHeading) return null;
+
+    // Gather text from the heading onward until we hit unrelated sections.
+    const stopMarkers = [
+        "what they're looking for",
+        "about the employer",
+        "similar jobs",
+        "matching is based on your profile"
+    ];
+
+    const blocks = [];
+    let node = targetHeading;
+    let guard = 0;
+    while (node && guard < 200) {
+        const text = normalizeText(node.innerText || node.textContent);
+        const lower = text.toLowerCase();
+        if (text && !isLikelySidebarOrSuggestedText(text)) {
+            if (stopMarkers.some((marker) => lower.includes(marker))) {
+                break;
+            }
+            blocks.push(text);
+        }
+
+        node = node.nextElementSibling;
+        guard += 1;
+    }
+
+    const merged = trimHandshakeDescriptionBoundaries(blocks.join("\n"));
+    if (merged.length > 250) {
+        return merged;
+    }
+
+    return null;
+}
+
 // Function to extract job data
 function extractJobData() {
     let title, company, description;
@@ -108,8 +317,32 @@ function extractJobData() {
             }
         }
         
-        // Try multiple selectors for Handshake job description - be more aggressive
+        // First, strongly target "Job description" heading region.
+        const headingBasedDescription = extractHandshakeJobDescriptionFromHeadings();
+        if (headingBasedDescription) {
+            description = headingBasedDescription;
+        }
+
+        // Second, try slicing from whole page text between known boundaries.
+        if (!description || description === "Job description not found." || description.length < 120) {
+            const wholePageDescription = extractHandshakeDescriptionFromWholePage();
+            if (wholePageDescription) {
+                description = wholePageDescription;
+            }
+        }
+
+        // Third, use a broader keyword-window slice from the full body text.
+        if (!description || description === "Job description not found." || description.length < 120) {
+            const windowDescription = extractHandshakeDescriptionByKeywordWindow();
+            if (windowDescription) {
+                description = windowDescription;
+            }
+        }
+
+        // Try multiple selectors for Handshake job description - but filter out sidebar text.
         const descSelectors = [
+            'section[class*="job"]',
+            '[data-testid*="job-description"]',
             '[class*="description"]',
             '[class*="Description"]',
             '[id*="description"]',
@@ -126,13 +359,18 @@ function extractJobData() {
             '[role="main"] [class*="content"]'
         ];
         
-        for (const selector of descSelectors) {
-            const element = document.querySelector(selector);
-            if (element && element.innerText && element.innerText.trim()) {
-                const text = element.innerText.trim();
-                // Make sure it's substantial content (more than just a few words)
-                if (text.length > 100) {
-                    description = text;
+        if (!description || description.length < 120) {
+            for (const selector of descSelectors) {
+                const elements = Array.from(document.querySelectorAll(selector));
+                for (const element of elements) {
+                    const text = normalizeText(element?.innerText);
+                    // Ignore short blocks and recommendation/search widgets.
+                    if (text.length > 180 && !isLikelySidebarOrSuggestedText(text)) {
+                        description = trimHandshakeDescriptionBoundaries(text);
+                        break;
+                    }
+                }
+                if (description) {
                     break;
                 }
             }
@@ -153,10 +391,11 @@ function extractJobData() {
                 let bestMatch = null;
                 
                 for (const div of allDivs) {
-                    const text = div.innerText?.trim() || '';
+                    const text = normalizeText(div.innerText);
                     // Skip if it contains the title or company (likely header)
                     if (text.length > maxLength && 
-                        text.length > 200 && 
+                        text.length > 250 &&
+                        !isLikelySidebarOrSuggestedText(text) &&
                         !text.includes(title) &&
                         text.length < 50000) { // reasonable max
                         maxLength = text.length;
@@ -165,7 +404,7 @@ function extractJobData() {
                 }
                 
                 if (bestMatch) {
-                    description = bestMatch;
+                    description = trimHandshakeDescriptionBoundaries(bestMatch);
                 }
             }
         }
@@ -200,6 +439,35 @@ function extractJobData() {
         .replace(/\n+/g, '\n') // Replace multiple newlines with single newline
         .trim() || "Job description not found.";
 
+    const invalidMarkers = ["similar jobs", "suggested for you"];
+    const descLower = description.toLowerCase();
+    if (invalidMarkers.some((marker) => descLower.includes(marker))) {
+        // Try one last clean slice before failing hard.
+        const recovered = trimHandshakeDescriptionBoundaries(description);
+        if (recovered && recovered !== "Job description not found." && recovered.length > 100) {
+            description = recovered;
+        } else {
+            // Keep best effort text instead of forcing failure.
+            description = description || "Job description not found.";
+        }
+    }
+
+    // Reject "About the employer" snippets unless the text looks like a real JD.
+    if (
+        (descLower.startsWith("about the employer") || descLower.includes("about the employer")) &&
+        !isStrongHandshakeDescription(description)
+    ) {
+        const recovered =
+            extractHandshakeDescriptionByKeywordWindow() ||
+            extractHandshakeDescriptionFromWholePage() ||
+            trimHandshakeDescriptionBoundaries(description);
+        if (recovered && recovered.length > 100) {
+            description = recovered;
+        } else {
+            description = "Job description not found.";
+        }
+    }
+
     return {
         title,
         company,
@@ -225,6 +493,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         };
         
         // Try to extract data immediately
+        expandAllHandshakeMoreButtons();
+        clickHandshakeMoreButton();
         let jobData = extractJobData();
         
         console.log('[CoverGenie] Initial extraction:', {
@@ -245,6 +515,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         
         // Use MutationObserver to watch for content changes (for dynamic pages)
         const observer = new MutationObserver(() => {
+            expandAllHandshakeMoreButtons();
+            clickHandshakeMoreButton();
             const newData = extractJobData();
             if (newData.description && 
                 newData.description !== "Job description not found." && 
@@ -268,6 +540,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         retries.forEach((delay, index) => {
             setTimeout(() => {
                 if (!responseSent) {
+                    expandAllHandshakeMoreButtons();
+                    clickHandshakeMoreButton();
                     jobData = extractJobData();
                     console.log(`[CoverGenie] Retry ${index + 1} extraction:`, {
                         title: jobData.title,
