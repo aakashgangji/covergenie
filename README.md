@@ -1,6 +1,6 @@
 # CoverGenie
 
-CoverGenie is a Chrome extension that automatically generates personalized cover letters using AI and your Resume. It extracts job descriptions from LinkedIn and generates tailored cover letters using Groq's Llama model.
+CoverGenie is a Chrome extension that automatically generates personalized cover letters using AI and your resume. It extracts job descriptions from LinkedIn and generates tailored cover letters using Groq and OpenAI-backed generation logic.
 
 ## Features
 
@@ -9,7 +9,7 @@ CoverGenie is a Chrome extension that automatically generates personalized cover
 - Professional formatting with Times New Roman, 12pt font
 - Download as Microsoft Word (.docx) document
 - Real-time editing of both job description and cover letter
-- Powered by Groq's Llama 3.3 70B model for high-quality content
+- Powered by Groq and OpenAI generation services for high-quality content
 - Advanced prompt engineering for personalized cover letters
 
 ## Prerequisites
@@ -37,7 +37,6 @@ pip install -r requirements.txt
    ```bash
    GROQ_API_KEY=your-groq-api-key-here
    ```
-   - The `.env` file is already in `.gitignore` and will not be committed to the repository
 
 4. Load the Chrome extension:
    - Open Chrome and go to `chrome://extensions/`
@@ -76,7 +75,7 @@ covergenie/
 ├── backend/
 │   ├── main.py              # FastAPI server
 │   └── utils/
-│       ├── ollama.py        # Groq API integration
+│       ├── cover_letter_generator.py # AI cover letter generation service
 │       ├── parser.py        # Text cleaning utilities
 │       └── prompt_builder.py # Cover letter prompt generation
 ├── extension/

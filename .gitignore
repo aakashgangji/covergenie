@@ -42,4 +42,10 @@ Thumbs.db
 
 # Project specific
 *.log
-.env 
+.env
+.env.local
+.env.*
+*.docx
+.coverage
+.pytest_cache/
+.venv/ 
